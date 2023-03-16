@@ -1,0 +1,16 @@
+# Node.js dependencies
+node_modules
+
+# Built files
+/dist
+
+# TypeScript build artifacts
+*.tsbuildinfo
+
+# IDE files
+.vscode
+.idea
+
+# Logs
+npm-debug.log*
+
