@@ -39,7 +39,6 @@ app.get("/clinics", async (req: Request, res: Response) => {
             availability: clinic.opening,
         }));
 
-        console.log(dentalClinics);
         const clinics: Clinic[] = [...dentalClinics, ...vetClinics];
 
         const filteredClinics = clinics.filter((clinic) => {
@@ -71,7 +70,7 @@ app.get("/clinics", async (req: Request, res: Response) => {
         res.status(200).json(filteredClinics);
     } catch (e) {
         console.error(e);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send("Error fetching clinics");
     }
 });
 
