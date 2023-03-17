@@ -74,7 +74,7 @@ app.get("/clinics", async (req: Request, res: Response) => {
     }
 });
 
-app.listen(8000, () => {
+app.listen(3000, () => {
     console.log("Server is running on port 8000");
 });
 
