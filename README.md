@@ -8,8 +8,7 @@ To install and run the application, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/JMGonzalezR/Clinic-Search-Task.git`
 2. Install dependencies: `npm install`
-3. Build the TypeScript code: `npm run build`
-4. Start the server: `npm run dev`
+3. Start the server: `npm run dev`
 
 The server will be running at http://localhost:3000.
 

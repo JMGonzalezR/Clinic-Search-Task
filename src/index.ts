@@ -1,23 +1,6 @@
 import express, { Request, Response } from "express";
-import axios from "axios";
-
-interface Clinic {
-    name: string;
-    stateName: string;
-    availability: {
-        from: string;
-        to: string;
-    };
-}
-
-interface VetClinic {
-    clinicName: string;
-    stateCode: string;
-    opening: {
-        from: string;
-        to: string;
-    };
-}
+import { Clinic, VetClinic } from "./types";
+import { formatClinics, fetchClinics } from "./utils";
 
 const app = express();
 
@@ -25,19 +8,15 @@ app.get("/clinics", async (req: Request, res: Response) => {
     const { name, state, from, to } = req.query;
 
     try {
-        const dentalClinicsResponse = await axios.get<Clinic[]>(
+        const dentalClinicsResponse = await fetchClinics<Clinic[]>(
             "https://storage.googleapis.com/scratchpay-code-challenge/dental-clinics.json"
         );
         const dentalClinics = dentalClinicsResponse.data;
 
-        const vetClinicsResponse = await axios.get<VetClinic[]>(
+        const vetClinicsResponse = await fetchClinics<VetClinic[]>(
             "https://storage.googleapis.com/scratchpay-code-challenge/vet-clinics.json"
         );
-        const vetClinics = vetClinicsResponse.data.map((clinic) => ({
-            name: clinic.clinicName,
-            stateName: clinic.stateCode,
-            availability: clinic.opening,
-        }));
+        const vetClinics = formatClinics(vetClinicsResponse.data);
 
         const clinics: Clinic[] = [...dentalClinics, ...vetClinics];
 
