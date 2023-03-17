@@ -44,23 +44,23 @@ app.get("/clinics", async (req: Request, res: Response) => {
         const filteredClinics = clinics.filter((clinic) => {
             if (
                 typeof name === "string" &&
-                clinic.name.toLowerCase().includes(name.toLowerCase())
+                !clinic.name.toLowerCase().includes(name.toLowerCase())
             ) {
                 return false;
             }
 
             if (
                 typeof state === "string" &&
-                clinic.stateName.toLowerCase().includes(state.toLowerCase())
+                !clinic.stateName.toLowerCase().includes(state.toLowerCase())
             ) {
                 return false;
             }
 
-            if (typeof from === "string" && clinic.availability.from < from) {
+            if (typeof from === "string" && clinic.availability.from > from) {
                 return false;
             }
 
-            if (typeof to === "string" && clinic.availability.to > to) {
+            if (typeof to === "string" && clinic.availability.to < to) {
                 return false;
             }
 
